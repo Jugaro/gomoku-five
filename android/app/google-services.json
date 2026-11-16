@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "374650120100",
+    "project_id": "gomoku-five",
+    "storage_bucket": "gomoku-five.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374650120100:android:051b53b8ea810d8de48331",
+        "android_client_info": {
+          "package_name": "com.example.gomoku5"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZemcEm-l7dHVx3c23PVqh-h91QBHik6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
