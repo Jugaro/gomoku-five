@@ -1,11 +1,11 @@
 {
-    "name": "gomoku5",
-    "short_name": "gomoku5",
+    "name": "Пять в ряд",
+    "short_name": "Пять в ряд",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#F7EEDC",
+    "theme_color": "#603B2C",
+    "description": "Пять в ряд на бесконечной доске: против ИИ, вдвоём и онлайн.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
