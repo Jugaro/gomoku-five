@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart' show Offset, Size;
 import 'package:gomoku5/app_services.dart';
@@ -8,6 +10,9 @@ import 'package:gomoku5/ui/home_screen.dart';
 import 'package:gomoku5/ui/online_screen.dart';
 import 'package:gomoku5/ui/settings_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+String _golden(String name) =>
+    'goldens/${Platform.isLinux ? 'linux' : 'windows'}/$name';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +43,7 @@ void main() {
     await prepare(tester);
     await expectLater(
       find.byType(HomeScreen),
-      matchesGoldenFile('goldens/home.png'),
+      matchesGoldenFile(_golden('home.png')),
     );
   });
 
@@ -56,7 +61,7 @@ void main() {
     }
     await expectLater(
       find.byType(GameScreen),
-      matchesGoldenFile('goldens/board.png'),
+      matchesGoldenFile(_golden('board.png')),
     );
   });
 
@@ -65,7 +70,7 @@ void main() {
     await open(tester, 'Настройки');
     await expectLater(
       find.byType(SettingsScreen),
-      matchesGoldenFile('goldens/settings.png'),
+      matchesGoldenFile(_golden('settings.png')),
     );
   });
 
@@ -74,7 +79,7 @@ void main() {
     await open(tester, 'Онлайн');
     await expectLater(
       find.byType(OnlineScreen),
-      matchesGoldenFile('goldens/online.png'),
+      matchesGoldenFile(_golden('online.png')),
     );
   });
 }
