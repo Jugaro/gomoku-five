@@ -57,6 +57,7 @@ class GomokuApp extends StatelessWidget {
     return SettingsScope(
       controller: settingsController,
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         title: 'Пять в ряд',
         debugShowCheckedModeBanner: false,
         theme: _buildTheme(),

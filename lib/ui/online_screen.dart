@@ -41,8 +41,6 @@ class _OnlineScreenState extends State<OnlineScreen> {
 
   StreamSubscription<String?>? _randomMatchSubscription;
   StreamSubscription<List<GameInvite>>? _invitationsSubscription;
-  StreamSubscription<List<GameInvite>>? _acceptedSubscription;
-  final _openedInvitationGameIds = <String>{};
   List<GameInvite> _invitations = const [];
   final _busyInvitations = <String>{};
 
@@ -80,7 +78,6 @@ class _OnlineScreenState extends State<OnlineScreen> {
     _cloud.removeListener(_cloudChanged);
     unawaited(_randomMatchSubscription?.cancel());
     unawaited(_invitationsSubscription?.cancel());
-    unawaited(_acceptedSubscription?.cancel());
     if (_searching) {
       unawaited(_backend.cancelRandomSearch().catchError((_) {}));
     }
@@ -135,16 +132,6 @@ class _OnlineScreenState extends State<OnlineScreen> {
         _onOnlineStreamError(error);
       }
     }
-    if (_acceptedSubscription == null) {
-      try {
-        _acceptedSubscription = _backend.watchAcceptedInvitations().listen(
-          _onAcceptedInvitations,
-          onError: _onOnlineStreamError,
-        );
-      } catch (error) {
-        _onOnlineStreamError(error);
-      }
-    }
   }
 
   void _onOnlineStreamError(Object error) {
@@ -178,20 +165,6 @@ class _OnlineScreenState extends State<OnlineScreen> {
   void _onInvitations(List<GameInvite> invitations) {
     if (!mounted) return;
     setState(() => _invitations = invitations);
-  }
-
-  void _onAcceptedInvitations(List<GameInvite> invitations) {
-    for (final invitation in invitations) {
-      final gameId = invitation.gameId;
-      if (invitation.status != 'accepted' ||
-          gameId == null ||
-          gameId.isEmpty ||
-          !_openedInvitationGameIds.add(gameId)) {
-        continue;
-      }
-      unawaited(_openGame(gameId));
-      break;
-    }
   }
 
   Future<void> _startRandomSearch() async {

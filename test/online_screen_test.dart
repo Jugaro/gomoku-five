@@ -167,34 +167,6 @@ void main() {
     expect(find.byType(OnlineGameScreen), findsOneWidget);
   });
 
-  testWidgets('принятое приглашение открывает партию у отправителя', (
-    tester,
-  ) async {
-    final store = ProfileStore();
-    await store.saveNickname('Игрок_5');
-    final backend = FakeOnlineBackend();
-    await _pumpOnline(tester, store: store, backend: backend);
-
-    backend.emitAcceptedInvitations([
-      const GameInvite(
-        id: 'outgoing-1',
-        fromUid: 'me',
-        toUid: 'opponent',
-        fromNickname: 'Игрок_5',
-        status: 'accepted',
-        gameId: 'accepted-game',
-      ),
-    ]);
-    await tester.pump();
-    backend.emitGame(_game('accepted-game'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 500));
-
-    expect(find.byType(OnlineGameScreen), findsOneWidget);
-    expect(backend.watchedGameIds, ['accepted-game']);
-    expect(find.text('Онлайн-партия'), findsOneWidget);
-  });
-
   testWidgets('входящее приглашение можно отклонить без открытия партии', (
     tester,
   ) async {
